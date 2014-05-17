@@ -230,7 +230,6 @@ print &#39;weight in kilograms is now:&#39;, weight_kg, &#39;and weight in pound
 age = <span class="dv">122</span>
 mass = mass * <span class="fl">2.0</span>
 age = age - <span class="dv">20</span></code></pre></li>
-<li><p>What does the following program print out? <sub>~</sub>python first, second = 'Grace', 'Hopper' third, fourth = second, first print third, fourth <sub>~</sub></p></li>
 </ol>
 </div>
 
@@ -299,10 +298,6 @@ age = age - <span class="dv">20</span></code></pre></li>
 
 <div class="">
 <p>The expression <code>data[30, 20]</code> may not surprise you, but <code>data[0, 0]</code> might. Programming languages like Fortran and MATLAB start counting at 1, because that's what human beings have done for thousands of years. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that's simpler for computers to do. As a result, if we have an M×N array in Python, its indices go from 0 to M-1 on the first axis and 0 to N-1 on the second. It takes a bit of getting used to, but one way to remember the rule is that the index is how many steps we have to take from the start to get the item we want.</p>
-<blockquote>
-<h4>In the Corner</h4>
-<p>What may also surprise you is that when Python displays an array, it shows the element with index <code>[0, 0]</code> in the upper left corner rather than the lower left. This is consistent with the way mathematicians draw matrices, but different from the Cartesian coordinates. The indices are (row, column) instead of (column, row) for the same reason.</p>
-</blockquote>
 </div>
 
 
@@ -635,7 +630,6 @@ minimum inflammation per day
 <div class="challenges">
 <h4 id="challenges">Challenges</h4>
 <ol style="list-style-type: decimal">
-<li><p>Why do all of our plots stop just short of the upper end of our graph? Why are the vertical lines in our plot of the minimum inflammation per day not vertical?</p></li>
 <li><p>Create a plot showing the standard deviation of the inflammation data for each day across all patients.</p></li>
 </ol>
 </div>
