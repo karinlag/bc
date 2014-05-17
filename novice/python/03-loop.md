@@ -178,20 +178,8 @@ print_characters(&#39;lead&#39;)</pre>
 
 <div class="">
 <p>We can call the <a href="../../gloss.html#loop-variable">loop variable</a> anything we like, but there must be a colon at the end of the line starting the loop, and we must indent the body of the loop.</p>
-<p>Here's another loop that repeatedly updates a variable:</p>
-</div>
 
 
-<div class="in">
-<pre>length = 0
-for vowel in &#39;aeiou&#39;:
-    length = length + 1
-print &#39;There are&#39;, length, &#39;vowels&#39;</pre>
-</div>
-
-
-<div class="">
-<p>It's worth tracing the execution of this little program step by step. Since there are five characters in <code>'aeiou'</code>, the statement on line 3 will be executed five times. The first time around, <code>length</code> is zero (the value assigned to it on line 1) and <code>vowel</code> is <code>'a'</code>. The statement adds 1 to the old value of <code>length</code>, producing 1, and updates <code>length</code> to refer to that new value. The next time around, <code>vowel</code> is <code>'e'</code> and <code>length</code> is 1, so <code>length</code> is updated to be 2. After three more updates, <code>length</code> is 5; since there is nothing left in <code>'aeiou'</code> for Python to process, the loop finishes and the <code>print</code> statement on line 4 tells us our final answer.</p>
 <p>Note that a loop variable is just a variable that's being used to record progress in a loop. It still exists after the loop is over, and we can re-use variables previously defined as loop variables as well:</p>
 </div>
 
@@ -223,8 +211,6 @@ print &#39;after the loop, letter is&#39;, letter</pre>
 <h4 id="challenges">Challenges</h4>
 <ol style="list-style-type: decimal">
 <li><p>Python has a built-in function called <code>range</code> that creates a list of numbers: <code>range(3)</code> produces <code>[0, 1, 2]</code>, <code>range(2, 5)</code> produces <code>[2, 3, 4]</code>, and <code>range(2, 10, 3)</code> produces <code>[2, 5, 8]</code>. Using <code>range</code>, write a function that prints the <span class="math">\(N\)</span> natural numbers: <sub>~</sub>python print_N(3) 1 2 3 <sub>~</sub></p></li>
-<li><p>Exponentiation is built into Python: <sub>~</sub>python print 2**4 16 <sub>~</sub> It also has a function called <code>pow</code> that calculates the same value. Write a function called <code>expo</code> that uses a loop to calculate the same result.</p></li>
-<li><p>Python's strings have methods, just like NumPy's arrays. One of these is called <code>reverse</code>: <sub>~</sub>python print 'Newton'.reverse() notweN <sub>~</sub> Write a function called <code>rev</code> that does the same thing: <sub>~</sub>python print rev('Newton') notweN <sub>~</sub> As always, be sure to include a docstring.</p></li>
 </ol>
 </div>
 
@@ -307,12 +293,6 @@ print &#39;odds after adding a value:&#39;, odds</pre>
 <div class="in">
 <pre>del odds[0]
 print &#39;odds after removing the first element:&#39;, odds</pre>
-</div>
-
-
-<div class="in">
-<pre>odds.reverse()
-print &#39;odds after reversing:&#39;, odds</pre>
 </div>
 
 
