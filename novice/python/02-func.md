@@ -213,9 +213,6 @@ print &#39;freezing point of water in Celsius:&#39;, fahr_to_celsius(32.0)</pre>
 <div class="challenges">
 <h4 id="challenges">Challenges</h4>
 <ol style="list-style-type: decimal">
-<li><p>&quot;Adding&quot; two strings produces their concatention: <code>'a' + 'b'</code> is <code>'ab'</code>. Write a function called <code>fence</code> that takes two parameters called <code>original</code> and <code>wrapper</code> and returns a new string that has the wrapper character at the beginning and end of the original:</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">print</span> fence(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;*&#39;</span>)
-*name*</code></pre></li>
 <li><p>If the variable <code>s</code> refers to a string, then <code>s[0]</code> is the string's first character and <code>s[-1]</code> is its last. Write a function called <code>outer</code> that returns a string made up of just the first and last characters of its input:</p>
 <pre class="sourceCode python"><code class="sourceCode python"><span class="kw">print</span> outer(<span class="st">&#39;helium&#39;</span>)
 hm</code></pre></li>
@@ -224,107 +221,7 @@ hm</code></pre></li>
 
 ### The Call Stack
 
-
-<div class="">
-<p>Let's take a closer look at what happens when we call <code>fahr_to_celsius(32.0)</code>. To make things clearer, we'll start by putting the initial value 32.0 in a variable and store the final result in one as well:</p>
-</div>
-
-
-<div class="in">
-<pre>original = 32.0
-final = fahr_to_celsius(original)</pre>
-</div>
-
-
-<div class="">
-<p>The diagram below shows what memory looks like after the first line has been executed:</p>
-</div>
-
-
-<div class="">
-<p><img src="img/python-call-stack-01.svg" alt="Call Stack (Initial State)" /></p>
-</div>
-
-
-<div class="">
-<p>When we call <code>fahr_to_celsius</code>, Python <em>doesn't</em> create the variable <code>temp</code> right away. Instead, it creates something called a <a href="../../gloss.html#stack-frame">stack frame</a> to keep track of the variables defined by <code>fahr_to_kelvin</code>. Initially, this stack frame only holds the value of <code>temp</code>:</p>
-</div>
-
-
-<div class="">
-<p><img src="img/python-call-stack-02.svg" alt="Call Stack Immediately After First Function Call" /></p>
-</div>
-
-
-<div class="">
-<p>When we call <code>fahr_to_kelvin</code> inside <code>fahr_to_celsius</code>, Python creates another stack frame to hold <code>fahr_to_kelvin</code>'s variables:</p>
-</div>
-
-
-<div class="">
-<p><img src="img/python-call-stack-03.svg" alt="Call Stack During First Nested Function Call" /></p>
-</div>
-
-
-<div class="">
-<p>It does this because there are now two variables in play called <code>temp</code>: the parameter to <code>fahr_to_celsius</code>, and the parameter to <code>fahr_to_kelvin</code>. Having two variables with the same name in the same part of the program would be ambiguous, so Python (and every other modern programming language) creates a new stack frame for each function call to keep that function's variables separate from those defined by other functions.</p>
-<p>When the call to <code>fahr_to_kelvin</code> returns a value, Python throws away <code>fahr_to_kelvin</code>'s stack frame and creates a new variable in the stack frame for <code>fahr_to_celsius</code> to hold the temperature in Kelvin:</p>
-</div>
-
-
-<div class="">
-<p><img src="img/python-call-stack-04.svg" alt="Call Stack After Return From First Nested Function Call" /></p>
-</div>
-
-
-<div class="">
-<p>It then calls <code>kelvin_to_celsius</code>, which means it creates a stack frame to hold that function's variables:</p>
-</div>
-
-
-<div class="">
-<p><img src="img/python-call-stack-05.svg" alt="Call Stack During Call to Second Nested Function" /></p>
-</div>
-
-
-<div class="">
-<p>Once again, Python throws away that stack frame when <code>kelvin_to_celsius</code> is done and creates the variable <code>result</code> in the stack frame for <code>fahr_to_celsius</code>:</p>
-</div>
-
-
-<div class="">
-<p><img src="img/python-call-stack-06.svg" alt="Call Stack After Second Nested Function Returns" /></p>
-</div>
-
-
-<div class="">
-<p>Finally, when <code>fahr_to_celsius</code> is done, Python throws away <em>its</em> stack frame and puts its result in a new variable called <code>final</code> that lives in the stack frame we started with:</p>
-</div>
-
-
-<div class="">
-<p><img src="img/python-call-stack-07.svg" alt="Call Stack After All Functions Have Finished" /></p>
-</div>
-
-
-<div class="">
-<p>This final stack frame is always there; it holds the variables we defined outside the functions in our code. What it <em>doesn't</em> hold is the variables that were in the various stack frames. If we try to get the value of <code>temp</code> after our functions have finished running, Python tells us that there's no such thing:</p>
-</div>
-
-
-<div class="in">
-<pre>print &#39;final value of temp after all function calls:&#39;, temp</pre>
-</div>
-
-<div class="out">
-<pre>---------------------------------------------------------------------------
-NameError                                 Traceback (most recent call last)
-&lt;ipython-input-12-ffd9b4dbd5f1&gt; in &lt;module&gt;()
-----&gt; 1 print &#39;final value of temp after all function calls:&#39;, temp
-
-NameError: name &#39;temp&#39; is not definedfinal value of temp after all function calls:</pre>
-</div>
-
+Explain that what happens in a function, stays in a function.
 
 <div class="">
 <p>Why go to all this trouble? Well, here's a function called <code>span</code> that calculates the difference between the mininum and maximum values in an array:</p>
@@ -373,13 +270,6 @@ print &#39;span of data:&#39;, span(diff)</pre>
 <p>The big idea here is <a href="../../gloss.html#encapsulation">encapsulation</a>, and it's the key to writing correct, comprehensible programs. A function's job is to turn several operations into one so that we can think about a single function call instead of a dozen or a hundred statements each time we want to do something. That only works if functions don't interfere with each other; if they do, we have to pay attention to the details once again, which quickly overloads our short-term memory.</p>
 </div>
 
-
-<div class="challenges">
-<h4 id="challenges">Challenges</h4>
-<ol style="list-style-type: decimal">
-<li>We previously wrote functions called <code>fence</code> and <code>outer</code>. Draw a diagram showing how the call stack changes when we run the following: <sub>~</sub>python print outer(fence('carbon', '+')) <sub>~</sub></li>
-</ol>
-</div>
 
 ### Testing and Documenting
 
@@ -453,7 +343,7 @@ min, mean, and and max of centered data are: -6.14875 -3.49054118942e-15 13.8512
 
 
 <div class="">
-<p>That seems almost right: the original mean was about 6.1, so the lower bound from zero is how about -6.1. The mean of the centered data isn't quite zero—we'll explore why not in the challenges—but it's pretty close. We can even go further and check that the standard deviation hasn't changed:</p>
+<p>That seems almost right: the original mean was about 6.1, so the lower bound from zero is how about -6.1. The mean of the centered data isn't quite zero—we'll explore why not in the challenges—but it's pretty close. We can even go further and check that the standard deviation hasn't changed OPTIONAL:</p>
 </div>
 
 
@@ -484,7 +374,7 @@ min, mean, and and max of centered data are: -6.14875 -3.49054118942e-15 13.8512
 
 <div class="">
 <p>Again, the difference is very small. It's still possible that our function is wrong, but it seems unlikely enough that we should probably get back to doing our analysis. We have one more task first, though: we should write some <a href="../../gloss.html#documentation">documentation</a> for our function to remind ourselves later what it's for and how to use it.</p>
-<p>The usual way to put documentation in software is to add <a href="../../gloss.html#comment">comments</a> like this:</p>
+<p>CONTINUE The usual way to put documentation in software is to add <a href="../../gloss.html#comment">comments</a> like this:</p>
 </div>
 
 
@@ -527,29 +417,8 @@ center(data, desired)
 
 
 <div class="">
-<p>A string like this is called a <a href="../../gloss.html#docstring">docstring</a>. We don't need to use triple quotes when we write one, but if we do, we can break the string across multiple lines:</p>
+<p>A string like this is called a <a href="../../gloss.html#docstring">docstring</a>.</p>
 </div>
-
-
-<div class="in">
-<pre>def center(data, desired):
-    &#39;&#39;&#39;Return a new array containing the original data centered around the desired value.
-    Example: center([1, 2, 3], 0) =&gt; [-1, 0, 1]&#39;&#39;&#39;
-    return (data - data.mean()) + desired
-
-help(center)</pre>
-</div>
-
-<div class="out">
-<pre>Help on function center in module __main__:
-
-center(data, desired)
-    Return a new array containing the original data centered around the desired value.
-    Example: center([1, 2, 3], 0) =&gt; [-1, 0, 1]
-
-</pre>
-</div>
-
 
 <div class="challenges">
 <h4 id="challenges">Challenges</h4>
@@ -560,152 +429,12 @@ center(data, desired)
 </ol>
 </div>
 
-### Defining Defaults
+### Defining Defaults 
 
-
-<div class="">
-<p>We have passed parameters to functions in two ways: directly, as in <code>span(data)</code>, and by name, as in <code>numpy.loadtxt(fname='something.csv', delimiter=',')</code>. In fact, we can pass the filename to <code>loadtxt</code> without the <code>fname=</code>:</p>
-</div>
-
-
-<div class="in">
-<pre>numpy.loadtxt(&#39;inflammation-01.csv&#39;, delimiter=&#39;,&#39;)</pre>
-</div>
-
-<div class="out">
-<pre>array([[ 0.,  0.,  1., ...,  3.,  0.,  0.],
-       [ 0.,  1.,  2., ...,  1.,  0.,  1.],
-       [ 0.,  1.,  1., ...,  2.,  1.,  1.],
-       ..., 
-       [ 0.,  1.,  1., ...,  1.,  1.,  1.],
-       [ 0.,  0.,  0., ...,  0.,  2.,  0.],
-       [ 0.,  0.,  1., ...,  1.,  1.,  0.]])</pre>
-</div>
 
 
 <div class="">
-<p>but we still need to say <code>delimiter=</code>:</p>
-</div>
-
-
-<div class="in">
-<pre>numpy.loadtxt(&#39;inflammation-01.csv&#39;, &#39;,&#39;)</pre>
-</div>
-
-<div class="out">
-<pre>---------------------------------------------------------------------------
-TypeError                                 Traceback (most recent call last)
-&lt;ipython-input-26-e3bc6cf4fd6a&gt; in &lt;module&gt;()
-----&gt; 1 numpy.loadtxt(&#39;inflammation-01.csv&#39;, &#39;,&#39;)
-
-/Users/gwilson/anaconda/lib/python2.7/site-packages/numpy/lib/npyio.pyc in loadtxt(fname, dtype, comments, delimiter, converters, skiprows, usecols, unpack, ndmin)
-    775     try:
-    776         # Make sure we&#39;re dealing with a proper dtype
---&gt; 777         dtype = np.dtype(dtype)
-    778         defconv = _getconv(dtype)
-    779 
-
-TypeError: data type &#34;,&#34; not understood</pre>
-</div>
-
-
-<div class="">
-<p>To understand what's going on, and make our own functions easier to use, let's re-define our <code>center</code> function like this:</p>
-</div>
-
-
-<div class="in">
-<pre>def center(data, desired=0.0):
-    &#39;&#39;&#39;Return a new array containing the original data centered around the desired value (0 by default).
-    Example: center([1, 2, 3], 0) =&gt; [-1, 0, 1]&#39;&#39;&#39;
-    return (data - data.mean()) + desired</pre>
-</div>
-
-
-<div class="">
-<p>The key change is that the second parameter is now written <code>desired=0.0</code> instead of just <code>desired</code>. If we call the function with two arguments, it works as it did before:</p>
-</div>
-
-
-<div class="in">
-<pre>test_data = numpy.zeros((2, 2))
-print center(test_data, 3)</pre>
-</div>
-
-<div class="out">
-<pre>[[ 3.  3.]
- [ 3.  3.]]
-</pre>
-</div>
-
-
-<div class="">
-<p>But we can also now call it with just one parameter, in which case <code>desired</code> is automatically assigned the <a href="../../gloss.html#default-parameter-value">default value</a> of 0.0:</p>
-</div>
-
-
-<div class="in">
-<pre>more_data = 5 + numpy.zeros((2, 2))
-print &#39;data before centering:&#39;, more_data
-print &#39;centered data:&#39;, center(more_data)</pre>
-</div>
-
-<div class="out">
-<pre>data before centering: [[ 5.  5.]
- [ 5.  5.]]
-centered data: [[ 0.  0.]
- [ 0.  0.]]
-</pre>
-</div>
-
-
-<div class="">
-<p>This is handy: if we usually want a function to work one way, but occasionally need it to do something else, we can allow people to pass a parameter when they need to but provide a default to make the normal case easier. The example below shows how Python matches values to parameters:</p>
-</div>
-
-
-<div class="in">
-<pre>def display(a=1, b=2, c=3):
-    print &#39;a:&#39;, a, &#39;b:&#39;, b, &#39;c:&#39;, c
-
-print &#39;no parameters:&#39;
-display()
-print &#39;one parameter:&#39;
-display(55)
-print &#39;two parameters:&#39;
-display(55, 66)</pre>
-</div>
-
-<div class="out">
-<pre>no parameters:
-a: 1 b: 2 c: 3
-one parameter:
-a: 55 b: 2 c: 3
-two parameters:
-a: 55 b: 66 c: 3
-</pre>
-</div>
-
-
-<div class="">
-<p>As this example shows, parameters are matched up from left to right, and any that haven't been given a value explicitly get their default value. We can override this behavior by naming the value as we pass it in:</p>
-</div>
-
-
-<div class="in">
-<pre>print &#39;only setting the value of c&#39;
-display(c=77)</pre>
-</div>
-
-<div class="out">
-<pre>only setting the value of c
-a: 1 b: 2 c: 77
-</pre>
-</div>
-
-
-<div class="">
-<p>With that in hand, let's look at the help for <code>numpy.loadtxt</code>:</p>
+<p>Let's look at the help for <code>numpy.loadtxt</code>:</p>
 </div>
 
 
@@ -811,15 +540,6 @@ loadtxt(fname, dtype=&lt;type &#39;float&#39;&gt;, comments=&#39;#&#39;, delimit
 <pre class="sourceCode python"><code class="sourceCode python">numpy.loadtxt(<span class="st">&#39;inflammation-01.csv&#39;</span>, <span class="st">&#39;,&#39;</span>)</code></pre>
 <p>then the filename is assigned to <code>fname</code> (which is what we want), but the delimiter string <code>','</code> is assigned to <code>dtype</code> rather than <code>delimiter</code>, because <code>dtype</code> is the second parameter in the list. That's why we don't have to provide <code>fname=</code> for the filename, but <em>do</em> have to provide <code>delimiter=</code> for the second parameter.</p>
 </div>
-
-
-<div class="challenges">
-<h4 id="challenges">Challenges</h4>
-<ol style="list-style-type: decimal">
-<li>Rewrite the <code>normalize</code> function so that it scales data to lie between 0.0 and 1.0 by default, but will allow the caller to specify lower and upper bounds if they want. Compare your implementation to your neighbor's: do the two functions always behave the same way?</li>
-</ol>
-</div>
-
 
 <div class="keypoints">
 <h4 id="key-points">Key Points</h4>
